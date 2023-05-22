@@ -24,11 +24,11 @@ There are four different ways to access VertiMonitorGWC using our API based on y
 ```YOUR_API_KEY: Your provided API key.
 DEPARTURE_TIME: Departure time in the format YYYY-MM-DDTHH:mm.
 ARRIVAL_TIME: Arrival time in the format YYYY-MM-DDTHH:mm.
-AIRCRAFT_ID: Your aircraft ID.
+AIRCRAFT_ID: Your aircraft ID. (Refer to aircraft_ids.csv)
 Parameters (optional): WIND, RAIN, TEMPERATURE_RANGE
 ```
 
-You can choose to provide both the Aircraft ID and the Parameters, or only the Aircraft ID. If you choose to provide only the Aircraft ID, the Parameters will be autofilled from our database.
+You can choose to provide both the Aircraft ID and the Parameters, or only the Aircraft ID (user-defined). If you choose to provide only the Aircraft ID, the Parameters will be autofilled from our database.
 
 For detailed usage instructions, refer to the different methods listed below:
 
