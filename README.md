@@ -6,7 +6,7 @@
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Fwww.dm-airtech.com/)](https://www.dm-airtech.com/)
 
 
-https://github.com/DM-AirTech/VertiMonitor/assets/40840002/510cc4b0-59c4-43dd-a4d0-08f163ee868e
+![image](https://github.com/DM-AirTech/VertiMonitor/assets/40840002/2df6781b-5cf0-45a9-b0ac-833df1412788)
 
 
 ## 1. Introduction
