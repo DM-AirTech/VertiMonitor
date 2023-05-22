@@ -1,0 +1,39 @@
+Aircraft Name,ID
+User Defined,user-defined
+Helicopter,H/C
+Vectored Thrust,VT
+Passenger Multicopter,PM
+Commercial Drone,CD
+Recreational Drone,RD
+Passenger Multicopter Auto,PMA
+DJI Mavic Pro,DMP
+DJI Mavic Platinum,DMPt
+DJI Mavic Air,DMA
+DJI Mavic 2,DM2
+DJI Mavic 2 Pro,DM2P
+DJI Mavic 2 Zoom,DM2Z
+DJI Mavic 2 Enterprise,DM2ENT
+DJI Mavic 2 Enterprise Dual,DM2ENTD
+DJI Mavic Mini,DMM
+DJI Phantom 3 Standard,DP3STD
+DJI Phantom 3 Advanced,DP3ADV
+DJI Phantom 3 Professional,DP3PROF
+DJI Phantom 4,DP4
+DJI Phantom 4 Advanced,DP4ADV
+DJI Phantom 4 Pro,DP4P
+DJI Phantom 4 Pro+,DP4P+
+DJI Phantom 4 Pro V2.0,DP4PV2
+DJI Spark,DSPARK
+DJI Inspire 1,DI1
+DJI Inspire 2,DI2
+DJI Matrice 210,DM210
+Parrot Bebop 5,PB5
+Parrot Anafi-10,PA10
+3DR-Solo 0,3DRS0
+DJI Matrice 200,DM200
+DJI Matrice 210 RTK,DM210RTK
+DJI Matrice 200 V2,DM200V2
+DJI Matrice 210 v2,DM210V2
+DJI Matrice 210 RTK V2,DM210RTKV2
+Lockheed Indago 3.1,LI3.1
+Zipline ZIP,ZZ
