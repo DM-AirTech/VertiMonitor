@@ -5,6 +5,10 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://uk.linkedin.com/company/dm-airtech)
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Fwww.dm-airtech.com/)](https://www.dm-airtech.com/)
 
+
+https://github.com/DM-AirTech/VertiMonitor/assets/40840002/510cc4b0-59c4-43dd-a4d0-08f163ee868e
+
+
 ## 1. Introduction
 VertiMonitor<sup>GWC</sup> is a real-time weather clearance tool developed by DM-AirTech (DMAT) that assists in the execution and automation of drone and eVTOL operations. It bases go/no-go decisions on hyperlocal weather conditions, supporting you in your flight operations. VertiMonitor<sup>GWC</sup> comes with a user-friendly Graphical User Interface (GUI) and can be easily integrated into your system through our seamless API.
 
