@@ -10,8 +10,7 @@ VertiMonitor<sup>GWC</sup> is a real-time weather clearance tool developed by DM
 
 Note: This GitHub repository focuses on the API of VertiMonitor<sup>GWC</sup>. For access to the GUI, please visit our website directly.
 
-![image](https://github.com/DM-AirTech/VertiMonitor/assets/40840002/60ef5f56-cdc3-4b73-90fb-2b42a8f1d7cd)
-
+![image](https://github.com/DM-AirTech/VertiMonitor/assets/40840002/6e8dbce4-3e83-41f4-b0da-36606f932666)
 
 ## 2. Obtaining API Key
 
