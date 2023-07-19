@@ -21,6 +21,7 @@ To access the VertiMonitor<sup>GWC</sup> data through the API, you will need an 
 There are four different ways to access VertiMonitorGWC using our API based on your preference. Common parameters used are:
 
 ```YOUR_API_KEY: Your provided API key.
+MODE: There are three modes supported by VertiMonitor<sup>GWC</sup>. (Trajectory, Volume (coming soon), Sensor (coming soon))
 START_TIME: Start time for the time window in the format YYYY-MM-DDTHH:mm.
 END_TIME: End time for the time window in the format YYYY-MM-DDTHH:mm.
 AIRCRAFT_ID: Your aircraft ID. (Refer to aircraft_ids.csv)
@@ -31,34 +32,26 @@ You can choose to provide both the Aircraft ID and the Parameters, or only the A
 
 For detailed usage instructions, refer to the different methods listed below:
 
+Note: -p is required iff -i is "user-defined"
+
 ### Method 1: Command Line Interface (CLI)
 
-With Aircraft ID and parameter
+`python verti_monitor_CLI.py -k "API_KEY" -m "MODE" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --points "POINT1" "POINT2" "POINT3"`
 
-`python verti_monitor_CLI.py -k API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID -p WIND RAIN TEMP_MIN TEMP_MAX --points POINT1 POINT2 POINT3`
-
-With only Aircraft ID
-
-`python verti_monitor_CLI.py -k API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID --points POINT1 POINT2 POINT3`
+Example: `-k "123abc" -m "trajectory" -d "2023-07-19T00:00" -a "2023-07-19T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
 
 ### Method 2: CLI with CSV file
 1.	Create a CSV file (e.g., points.csv) with the following format:
 ```
-point	latitude	longitude	altitude
-1	51.505711	-0.195364	100
-2	51.5067445	-0.185987	200
-3	51.5170358	-0.0921961	100
+point,latitude,longitude,altitude
+1,51.505711,-0.195364,100
+2,51.5067445,-0.185987,200
+3,51.5170358,-0.0921961,100
 ```
 
 2. Just like method 1 use the following terminal command with the exception of adding the csv file path.
 
-With Aircraft ID and parameter
-
-`python verti_monitor_CLI.py -k YOUR_API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID -p WIND RAIN TEMP_MIN TEMP_MAX --csv /path/to/points.csv`
-
-With only Aircraft ID
-
-`python verti_monitor_CLI.py -k YOUR_API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID --csv /path/to/points.csv`
+`python verti_monitor_CLI.py -k "API_KEY" -m "MODE" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --csv /path/to/points.csv`
 
 ### Method 3: Python integration
 In your Python script, import verti_monitor_integrate and use the send_request function as shown in below:
@@ -66,29 +59,31 @@ In your Python script, import verti_monitor_integrate and use the send_request f
 import verti_monitor_integrate
 
 api_key = "YOUR_API_KEY"
+mode = MODE
 start_time = "START_TIME"
 end_time = "END_TIME"
 aircraft_id = "AIRCRAFT_ID"
-parameters = ("WIND", "RAIN", "TEMP_MIN", "TEMP_MAX")#optional
+parameters = (WIND, RAIN, TEMP_MIN, TEMP_MAX) #optional
 
 points = [
-    {"point": "POINT_1", "latitude": LATITUDE_1, "longitude": LONGITUDE_1, "altitude": ALTITUDE_1},
-    {"point": "POINT_2", "latitude": LATITUDE_2, "longitude": LONGITUDE_2, "altitude": ALTITUDE_2},
-    {"point": "POINT_3", "latitude": LATITUDE_3, "longitude": LONGITUDE_3, "altitude": ALTITUDE_3}
+    {"point": "1", "Latitude": LATITUDE_1, "Longitude": LONGITUDE_1, "altitude": ALTITUDE_1},
+    {"point": "2", "Latitude": LATITUDE_2, "Longitude": LONGITUDE_2, "altitude": ALTITUDE_2},
+    {"point": "3", "Latitude": LATITUDE_3, "Longitude": LONGITUDE_3, "altitude": ALTITUDE_3}
 ]
 
-verti_monitor_integrate.send_request(api_key, start_time, end_time, aircraft_id, parameters, points)
+verti_monitor_integrate.send_request(api_key, mode, start_time, end_time, aircraft_id, points, parameters)
 
 ```
 
 ### Method 4: CURL command
-With Aircraft ID and parameter
+
 ```
-curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"startTime\": \"START_TIME\", \"endTime\": \"END_TIME\", \"aircraftId\": \"AIRCRAFT_ID\", \"parameters\": {\"wind\": \"WIND\", \"rain\": \"RAIN\", \"temp_min\": \"TEMP_MIN\", \"temp_max\": \"TEMP_MAX\"}, \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
+curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"ApiKey\": \"YOUR_API_KEY\",\"uuid\": \"UUID\" ,\"mode\": \"MODE\" \"startTime\": \"START_TIME\", \"endTime\": \"END_TIME\", \"aircraftId\": \"AIRCRAFT_ID\", \"parameters\": {\"wind\": \WIND\, \"rain\": \RAIN\, \"temp_min\": \TEMP_MIN\, \"temp_max\": \TEMP_MAX\}, \"points\": [{\"point\": \1\, \"Latitude\": LATITUDE_1, \"Longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \2\, \"Latitude\": LATITUDE_2, \"Longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \3\, \"Latitude\": LATITUDE_3, \"Longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
 ```
-With only Aircraft ID
+Example: 
+
 ```
-curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"startTime\": \"START_TIME\", \"endTime\": \"END_TIME\", \"aircraftId\": \"AIRCRAFT_ID\",  \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
+curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"ApiKey\": \"API_KEY\",\"uuid\": \"b4a2ea11-8ad7-42ac-83d3-8c19b0bd4607\", \"mode\": \"trajectory\", \"startTime\": \"2023-07-19T00:00\", \"endTime\": \"2023-07-19T03:00\", \"aircraftId\": \"user-defined\", \"parameters\": {\"wind\": 2, \"rain\": 3, \"temp_min\": 5, \"temp_max\": 5}, \"points\": [{\"point\": \"1\", \"Latitude\": 52, \"Longitude\": 2, \"altitude\": 100}, {\"point\": \"2\", \"Latitude\": 53, \"Longitude\": 1, \"altitude\": 100}, {\"point\": \"3\", \"Latitude\": 54, \"Longitude\": 3, \"altitude\": 100}]}"
 ```
 
 ## 4. Output
