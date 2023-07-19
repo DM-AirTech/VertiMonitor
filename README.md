@@ -38,7 +38,9 @@ Note: -p is required iff -i is "user-defined"
 
 `python verti_monitor_CLI.py -k "API_KEY" -m "MODE" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --points "POINT1" "POINT2" "POINT3"`
 
-Example: `-k "123abc" -m "trajectory" -d "2023-07-19T00:00" -a "2023-07-19T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
+Example: 
+
+`python verti_monitor_CLI.py -k "123abc" -m "trajectory" -d "2023-07-19T00:00" -a "2023-07-19T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
 
 ### Method 2: CLI with CSV file
 1.	Create a CSV file (e.g., points.csv) with the following format:
@@ -83,7 +85,7 @@ curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Conten
 Example: 
 
 ```
-curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"ApiKey\": \"API_KEY\",\"uuid\": \"b4a2ea11-8ad7-42ac-83d3-8c19b0bd4607\", \"mode\": \"trajectory\", \"startTime\": \"2023-07-19T00:00\", \"endTime\": \"2023-07-19T03:00\", \"aircraftId\": \"user-defined\", \"parameters\": {\"wind\": 2, \"rain\": 3, \"temp_min\": 5, \"temp_max\": 5}, \"points\": [{\"point\": \"1\", \"Latitude\": 52, \"Longitude\": 2, \"altitude\": 100}, {\"point\": \"2\", \"Latitude\": 53, \"Longitude\": 1, \"altitude\": 100}, {\"point\": \"3\", \"Latitude\": 54, \"Longitude\": 3, \"altitude\": 100}]}"
+curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"ApiKey\": \"API_KEY\",\"uuid\": \"b4a2ea11-8ad7-42ac-83d3-8c19b0bd4607\", \"mode\": \"trajectory\", \"startTime\": \"2023-07-19T00:00\", \"endTime\": \"2023-07-19T03:00\", \"aircraftId\": \"user-defined\", \"parameters\": {\"wind\": 10, \"rain\": 0, \"temp_min\": -5, \"temp_max\": 40}, \"points\": [{\"point\": \"1\", \"Latitude\": 52, \"Longitude\": 2, \"altitude\": 100}, {\"point\": \"2\", \"Latitude\": 53, \"Longitude\": 1, \"altitude\": 100}, {\"point\": \"3\", \"Latitude\": 54, \"Longitude\": 3, \"altitude\": 100}]}"
 ```
 
 ## 4. Output
