@@ -18,23 +18,27 @@ import argparse
 import json
 import requests
 import csv
+import uuid
+
+
 
 def parse_point(point_str):
     point_data = point_str.split(',')
     return {
         "point": point_data[0],
-        "latitude": float(point_data[1]),
-        "longitude": float(point_data[2]),
+        "Latitude": float(point_data[1]),
+        "Longitude": float(point_data[2]),
         "altitude": int(point_data[3])
     }
 
 def main():
     parser = argparse.ArgumentParser(description="VertiMonitor API Request")
     parser.add_argument("-k", "--apiKey", required=True, help="API key")
-    parser.add_argument("-d", "--departureTime", required=True, help="Departure time (YYYY-MM-DDTHH:mm)")
-    parser.add_argument("-a", "--arrivalTime", required=True, help="Arrival time (YYYY-MM-DDTHH:mm)")
+    parser.add_argument("-m", "--mode", required=True, help="trajectory, volume or sensor")
+    parser.add_argument("-d", "--startTime", required=True, help="Departure time (YYYY-MM-DDTHH:mm)")
+    parser.add_argument("-a", "--endTime", required=True, help="Arrival time (YYYY-MM-DDTHH:mm)")
     parser.add_argument("-i", "--aircraftId", required=True, help="Aircraft ID")
-    parser.add_argument("-p", "--parameters", nargs=3, metavar=("wind", "rain", "temperature"), help="Parameters (wind, rain, temperature)", required=False)
+    parser.add_argument("-p", "--parameters", nargs=4, metavar=("wind", "rain", "temp_min", "temp_max"), help="Parameters (wind, rain, temp_min. temp_max)", required=False)
     parser.add_argument("-c", "--csv", help="CSV file containing points (optional)")
     parser.add_argument("--points", nargs='+', help="Points in format: point,latitude,longitude,altitude (optional)")
 
@@ -51,23 +55,28 @@ def main():
             for row in reader:
                 points.append({
                     "point": row["points"],
-                    "latitude": float(row["latitude"]),
-                    "longitude": float(row["longitude"]),
+                    "Latitude": float(row["latitude"]),
+                    "Longitude": float(row["longitude"]),
                     "altitude": int(row["altitude"])
                 })
     elif args.points:
         for point_str in args.points:
             points.append(parse_point(point_str))
-
+    # Generate a random UUID
+    random_uuid = uuid.uuid4()
+    
     data_new = {
-        "apiKey": args.apiKey,
-        "departureTime": args.departureTime,
-        "arrivalTime": args.arrivalTime,
+        "ApiKey": args.apiKey,
+        "uuid": str(random_uuid),
+        "mode": args.mode,
+        "startTime": args.startTime,
+        "endTime": args.endTime,
         "aircraftId": args.aircraftId,
         "parameters": {
-            "wind": args.parameters[0] if args.parameters else None,
-            "rain": args.parameters[1] if args.parameters else None,
-            "temperature": args.parameters[2] if args.parameters else None,
+            "wind": args.parameters[0] if args.parameters else 10,
+            "rain": args.parameters[1] if args.parameters else 0,
+            "temp_min": args.parameters[2] if args.parameters else -6,
+            "temp_max": args.parameters[3] if args.parameters else 40,
         },
         "points": points
     }
@@ -75,7 +84,7 @@ def main():
 
     url = "https://www.dm-airtech.eu/api/VertiMonitorAPI"
 
-  
+    
     payload = json.dumps(data_new)
     headers = {
         'Content-Type': 'application/json',
@@ -85,7 +94,6 @@ def main():
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 200:
-        print("Request submitted successfully")
         print(response.text)
     else:
         print("Request failed with status code", response.status_code)
