@@ -21,8 +21,8 @@ To access the VertiMonitor<sup>GWC</sup> data through the API, you will need an 
 There are four different ways to access VertiMonitorGWC using our API based on your preference. Common parameters used are:
 
 ```YOUR_API_KEY: Your provided API key.
-DEPARTURE_TIME: Departure time in the format YYYY-MM-DDTHH:mm.
-ARRIVAL_TIME: Arrival time in the format YYYY-MM-DDTHH:mm.
+START_TIME: Start time for the time window in the format YYYY-MM-DDTHH:mm.
+END_TIME: End time for the time window in the format YYYY-MM-DDTHH:mm.
 AIRCRAFT_ID: Your aircraft ID. (Refer to aircraft_ids.csv)
 Parameters (optional): WIND, RAIN, TEMPERATURE_RANGE
 ```
@@ -35,11 +35,11 @@ For detailed usage instructions, refer to the different methods listed below:
 
 With Aircraft ID and parameter
 
-`python verti_monitor_CLI.py -k API_KEY -d DEPARTURE_TIME -a ARRIVAL_TIME -i AIRCRAFT_ID -p WIND RAIN TEMPERATURE_RANGE --points POINT1 POINT2 POINT3`
+`python verti_monitor_CLI.py -k API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID -p WIND RAIN TEMP_MIN TEMP_MAX --points POINT1 POINT2 POINT3`
 
 With only Aircraft ID
 
-`python verti_monitor_CLI.py -k API_KEY -d DEPARTURE_TIME -a ARRIVAL_TIME -i AIRCRAFT_ID --points POINT1 POINT2 POINT3`
+`python verti_monitor_CLI.py -k API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID --points POINT1 POINT2 POINT3`
 
 ### Method 2: CLI with CSV file
 1.	Create a CSV file (e.g., points.csv) with the following format:
@@ -54,11 +54,11 @@ point	latitude	longitude	altitude
 
 With Aircraft ID and parameter
 
-`python verti_monitor_CLI.py -k YOUR_API_KEY -d DEPARTURE_TIME -a ARRIVAL_TIME -i AIRCRAFT_ID -p WIND RAIN TEMPERATURE --csv /path/to/points.csv`
+`python verti_monitor_CLI.py -k YOUR_API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID -p WIND RAIN TEMP_MIN TEMP_MAX --csv /path/to/points.csv`
 
 With only Aircraft ID
 
-`python verti_monitor_CLI.py -k YOUR_API_KEY -d DEPARTURE_TIME -a ARRIVAL_TIME -i AIRCRAFT_ID --csv /path/to/points.csv`
+`python verti_monitor_CLI.py -k YOUR_API_KEY -d START_TIME -a END_TIME -i AIRCRAFT_ID --csv /path/to/points.csv`
 
 ### Method 3: Python integration
 In your Python script, import verti_monitor_integrate and use the send_request function as shown in below:
@@ -66,10 +66,10 @@ In your Python script, import verti_monitor_integrate and use the send_request f
 import verti_monitor_integrate
 
 api_key = "YOUR_API_KEY"
-departure_time = "DEPARTURE_TIME"
-arrival_time = "ARRIVAL_TIME"
+start_time = "START_TIME"
+end_time = "END_TIME"
 aircraft_id = "AIRCRAFT_ID"
-parameters = ("WIND", "RAIN", "TEMPERATURE")#optional
+parameters = ("WIND", "RAIN", "TEMP_MIN", "TEMP_MAX")#optional
 
 points = [
     {"point": "POINT_1", "latitude": LATITUDE_1, "longitude": LONGITUDE_1, "altitude": ALTITUDE_1},
@@ -77,28 +77,49 @@ points = [
     {"point": "POINT_3", "latitude": LATITUDE_3, "longitude": LONGITUDE_3, "altitude": ALTITUDE_3}
 ]
 
-verti_monitor_integrate.send_request(api_key, departure_time, arrival_time, aircraft_id, parameters, points)
+verti_monitor_integrate.send_request(api_key, start_time, end_time, aircraft_id, parameters, points)
 
 ```
 
 ### Method 4: CURL command
 With Aircraft ID and parameter
 ```
-curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"departureTime\": \"DEPARTURE_TIME\", \"arrivalTime\": \"ARRIVAL_TIME\", \"aircraftId\": \"AIRCRAFT_ID\", \"parameters\": {\"wind\": \"WIND\", \"rain\": \"RAIN\", \"temperature\": \"TEMPERATURE\"}, \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
+curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"startTime\": \"START_TIME\", \"endTime\": \"END_TIME\", \"aircraftId\": \"AIRCRAFT_ID\", \"parameters\": {\"wind\": \"WIND\", \"rain\": \"RAIN\", \"temp_min\": \"TEMP_MIN\", \"temp_max\": \"TEMP_MAX\"}, \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
 ```
 With only Aircraft ID
 ```
-curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"departureTime\": \"DEPARTURE_TIME\", \"arrivalTime\": \"ARRIVAL_TIME\", \"aircraftId\": \"AIRCRAFT_ID\",  \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
+curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --data "{\"apiKey\": \"YOUR_API_KEY\", \"startTime\": \"START_TIME\", \"endTime\": \"END_TIME\", \"aircraftId\": \"AIRCRAFT_ID\",  \"points\": [{\"point\": \"POINT_1\", \"latitude\": LATITUDE_1, \"longitude\": LONGITUDE_1, \"altitude\": ALTITUDE_1}, {\"point\": \"POINT_2\", \"latitude\": LATITUDE_2, \"longitude\": LONGITUDE_2, \"altitude\": ALTITUDE_2}, {\"point\": \"POINT_3\", \"latitude\": LATITUDE_3, \"longitude\": LONGITUDE_3, \"altitude\": ALTITUDE_3}]}"
 ```
 
 ## 4. Output
-The output format is the same for all the methods listed above. Here is an example:
+The output format is the same for all the methods listed above. Here is an example for the output of the API:
 ```
 {
-    "result": "1",
-    "rationale": "This flight is safe to schedule with Departure time of 2023-04-15T18:00 and Arrival time of 2023-04-15T19:00"
+    "results": [
+        {
+            "status": {
+                "confidence": "88.28%",
+                "rationale": "Wind speed exceeds limit at 1 location.",
+                "result": "0"
+            },
+            "timestamp": "2023-07-19T00:00"
+        },
+        {
+            "status": {
+                "confidence": "88.36%",
+                "rationale": "All conditions are within the allowable limits.",
+                "result": "1"
+            },
+            "timestamp": "2023-07-19T01:00"
+        }
+    ],
+    "uuid": "98377bc3-376e-488c-9459-6abff714b74e"
 }
 ```
+Here is an example of output in GUI: 
+
+![image](https://github.com/DM-AirTech/VertiMonitor/assets/40840002/4b82642a-48b4-405d-9c0a-ab88b23b47d9)
+
 ## Support
 
 For any questions, concerns, or technical support, please reach out to our dedicated support team at info@dm-airtech.com. 
