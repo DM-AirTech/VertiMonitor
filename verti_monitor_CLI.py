@@ -54,7 +54,7 @@ def main():
             reader = csv.DictReader(csvfile)
             for row in reader:
                 points.append({
-                    "point": row["points"],
+                    "point": row["point"],
                     "Latitude": float(row["latitude"]),
                     "Longitude": float(row["longitude"]),
                     "altitude": int(row["altitude"])
@@ -62,6 +62,7 @@ def main():
     elif args.points:
         for point_str in args.points:
             points.append(parse_point(point_str))
+
     # Generate a random UUID
     random_uuid = uuid.uuid4()
     
@@ -73,10 +74,10 @@ def main():
         "endTime": args.endTime,
         "aircraftId": args.aircraftId,
         "parameters": {
-            "wind": args.parameters[0] if args.parameters else 10,
-            "rain": args.parameters[1] if args.parameters else 0,
-            "temp_min": args.parameters[2] if args.parameters else -6,
-            "temp_max": args.parameters[3] if args.parameters else 40,
+            "wind": float(args.parameters[0]) if args.parameters else 10,
+            "rain": float(args.parameters[1]) if args.parameters else 0,
+            "temp_min": float(args.parameters[2]) if args.parameters else -6,
+            "temp_max": float(args.parameters[3]) if args.parameters else 40,
         },
         "points": points
     }

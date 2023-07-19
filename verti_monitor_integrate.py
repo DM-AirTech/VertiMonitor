@@ -22,21 +22,25 @@ import argparse
 import json
 import requests
 import csv
+import uuid
 
 def parse_point(point_str):
     point_data = point_str.split(',')
     return {
         "point": point_data[0],
-        "latitude": float(point_data[1]),
-        "longitude": float(point_data[2]),
+        "Latitude": float(point_data[1]),
+        "Longitude": float(point_data[2]),
         "altitude": int(point_data[3])
     }
 
-def send_request(api_key, departure_time, arrival_time, aircraft_id, points, parameters=None):
+def send_request(api_key, mode, start_time, end_time, aircraft_id, points, parameters=None):
+    random_uuid = uuid.uuid4()
     data = {
-        "apiKey": api_key,
-        "departureTime": departure_time,
-        "arrivalTime": arrival_time,
+        "ApiKey": api_key,
+        "uuid": str(random_uuid),
+        "mode": mode,
+        "startTime": start_time,
+        "endTime": end_time,
         "aircraftId": aircraft_id,
         "points": points
     }
@@ -45,12 +49,14 @@ def send_request(api_key, departure_time, arrival_time, aircraft_id, points, par
         data["parameters"] = {
             "wind": parameters[0],
             "rain": parameters[1],
-            "temperature": parameters[2]
+            "temp_min": parameters[2],
+            "temp_max": parameters[3]
         }
 
     url = "https://www.dm-airtech.eu/api/VertiMonitorAPI"
 
     payload = json.dumps(data)
+  
     headers = {
         'Content-Type': 'application/json',
         # 'Authorization': f'Bearer {api_key}' make it work for frontend as well
@@ -59,7 +65,7 @@ def send_request(api_key, departure_time, arrival_time, aircraft_id, points, par
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 200:
-        print("Request submitted successfully. API response:\n", response.text)
+        print(response.text)
     else:
         print("Request failed with status code", response.status_code)
 
