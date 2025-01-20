@@ -20,9 +20,9 @@ To access the VertiMonitor<sup>GWC</sup> data through the API, you will need an 
 
 There are four different ways to access VertiMonitorGWC using our API based on your preference. Common parameters used are:
 
-```YOUR_API_KEY: Your provided API key.
+```YOUR_API_KEY: Your provided API key. 
 MODE: There are three modes supported by VertiMonitor<sup>GWC</sup>. (Trajectory, Volume (coming soon), Sensor (coming soon))
-MODEL: These are four models supported. (gfs-global, metar, icon_global or icon_seamless)
+MODEL: There are four models supported. (gfs-global, metar, icon_global or icon_seamless)
 START_TIME: Start time for the time window in the format YYYY-MM-DDTHH:mm.
 END_TIME: End time for the time window in the format YYYY-MM-DDTHH:mm.
 AIRCRAFT_ID: Your aircraft ID. Refer to [aircraft_ids.csv](https://github.com/DM-AirTech/VertiMonitor/blob/main/aircraft_ids.csv)   
@@ -31,7 +31,9 @@ Parameters (optional): WIND, RAIN, TEMPERATURE_RANGE
 
 You can choose to provide both the Aircraft ID and the Parameters, or only the Aircraft ID (user-defined). If you choose to provide only the Aircraft ID, the Parameters will be autofilled from our database.
 
-For detailed usage instructions, refer to the different methods listed below:
+You can find more information on the API documentation [here](https://www.dm-airtech.eu/RTP/Vertimonitor_api_doc) but this requires you to have an account registered. Please head [here](https://www.dm-airtech.eu/Account/Register) to register a new account.
+
+For detailed usage instructions please refer to the different methods listed below:
 
 Note: -p is required if and only if -i is set to "user-defined".
 
@@ -41,7 +43,7 @@ Note: -p is required if and only if -i is set to "user-defined".
 
 Example: 
 
-`python verti_monitor_CLI.py -k "123abc" -m "trajectory" -md "gfs_global" -d "2023-07-19T00:00" -a "2023-07-19T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
+`python verti_monitor_CLI.py -k "123abc" -m "trajectory" -md "gfs_global" -d "2025-01-20T00:00" -a "2025-01-20T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
 
 ### Method 2: CLI with CSV file
 1.	Create a CSV file (e.g., points.csv) with the following format:
@@ -52,14 +54,14 @@ point,latitude,longitude,altitude
 3,51.5170358,-0.0921961,100
 ```
 
-2. Just like method 1 use the following terminal command with the exception of adding the csv file path.
+2. Just like method 1 please use the following terminal command with the exception of adding the csv file path.
 
 `python verti_monitor_CLI.py -k "API_KEY" -m "MODE" -md "gfs_global" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --csv /path/to/points.csv`
 
 ### Method 3: Python integration
-In your Python script, import verti_monitor_integrate and use the send_request function as shown in below:
+In your Python script, import Sample_Integrate and use the send_request function as shown in below:
 ```
-import verti_monitor_integrate
+import Sample_Integrate
 
 api_key = "YOUR_API_KEY"
 mode = "MODE"
@@ -81,6 +83,7 @@ verti_monitor_integrate.send_request(api_key, mode, start_time, end_time, aircra
 
 ### Method 4: CURL command
 
+Please input the API key where YOUR_API_KEY is
 ```
 curl --location "https://www.dm-airtech.eu/api/VertiMonitorAPI" --header "Content-Type: application/json" --header "Authorization: Bearer YOUR_API_KEY" --header "User-Agent: PostmanRuntime/7.43.0" \
 --header "Accept: */*" --header "Accept-Encoding: gzip, deflate, br" --header "Connection: keep-alive" --header "Referer: https://dm-airtech.eu/api/VertiMonitorAPI" \
