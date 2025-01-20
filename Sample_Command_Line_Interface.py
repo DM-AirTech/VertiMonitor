@@ -100,13 +100,13 @@ def main():
         'Referer': 'https://dm-airtech.eu/api/VertiMonitorAPI',
         'Host': 'www.dm-airtech.eu'
     }
-    print(payload)
-    # response = requests.request("POST", url, headers=headers, data=payload)
 
-    # if response.status_code == 200:
-    #     print(response.text)
-    # else:
-    #     print("Request failed with status code", response.status_code)
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    if response.status_code == 200:
+        print(response.text)
+    else:
+        print("Request failed with status code", response.status_code)
 
 if __name__ == "__main__":
     main()
