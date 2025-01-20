@@ -25,11 +25,11 @@ MODE: There are three modes supported by VertiMonitor<sup>GWC</sup>. (Trajectory
 MODEL: There are four models supported. (gfs-global, metar, icon_global or icon_seamless)
 START_TIME: Start time for the time window in the format YYYY-MM-DDTHH:mm.
 END_TIME: End time for the time window in the format YYYY-MM-DDTHH:mm.
-AIRCRAFT_ID: Your aircraft ID. Refer to [aircraft_ids.csv](https://github.com/DM-AirTech/VertiMonitor/blob/main/aircraft_ids.csv)   
+AIRCRAFT_ID: Your aircraft ID. Refer to aircraft_ids.csv.
 Parameters (optional): WIND, RAIN, TEMPERATURE_RANGE
 ```
 
-You can choose to provide both the Aircraft ID and the Parameters, or only the Aircraft ID (user-defined). If you choose to provide only the Aircraft ID, the Parameters will be autofilled from our database.
+You can choose to provide both the [Aircraft ID](https://github.com/DM-AirTech/VertiMonitor/blob/main/aircraft_ids.csv)  and the Parameters, or only the Aircraft ID (user-defined). If you choose to provide only the Aircraft ID, the Parameters will be autofilled from our database.
 
 You can find more information on the API documentation [here](https://www.dm-airtech.eu/RTP/Vertimonitor_api_doc) but this requires you to have an account registered. Please head [here](https://www.dm-airtech.eu/Account/Register) to register a new account.
 
