@@ -21,7 +21,7 @@ To access the VertiMonitor<sup>GWC</sup> data through the API, you will need an 
 There are four different ways to access VertiMonitorGWC using our API based on your preference. Common parameters used are:
 
 ```YOUR_API_KEY: Your provided API key. 
-MODE: There are three modes supported by VertiMonitor<sup>GWC</sup>. (Trajectory, Volume (coming soon), Sensor (coming soon))
+MODE: There are three modes supported by VertiMonitor<sup>GWC</sup>. (Trajectory, Volume (Tier3 Subscription), Sensor (coming soon))
 MODEL: There are four models supported. (gfs-global, metar, icon_global or icon_seamless)
 START_TIME: Start time for the time window in the format YYYY-MM-DDTHH:mm.
 END_TIME: End time for the time window in the format YYYY-MM-DDTHH:mm.
@@ -39,11 +39,11 @@ Note: -p is required if and only if -i is set to "user-defined".
 
 ### Method 1: Command Line Interface (CLI)
 
-`python verti_monitor_CLI.py -k "API_KEY" -m "MODE" -md "MODEL" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --points "POINT1" "POINT2" "POINT3"`
+`python Sample_Command_Line_Interface.py -k "API_KEY" -m "MODE" -md "MODEL" -d "START_TIME" -a "END_TIME" -i "AIRCRAFT_ID" -p WIND RAIN TEMP_MIN TEMP_MAX --points "POINT1" "POINT2" "POINT3"`
 
 Example: 
 
-`python verti_monitor_CLI.py -k "123abc" -m "trajectory" -md "gfs_global" -d "2025-01-20T00:00" -a "2025-01-20T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
+`python Sample_Command_Line_Interface.py -k "123abc" -m "trajectory" -md "gfs_global" -d "2025-01-20T00:00" -a "2025-01-20T03:00" -i "user-defined" -p 8 0 -5 50 --points "1,51,1,100" "2,52,1,100"`
 
 ### Method 2: CLI with CSV file
 1.	Create a CSV file (e.g., points.csv) with the following format:
