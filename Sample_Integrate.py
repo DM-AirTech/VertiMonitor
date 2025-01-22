@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
 Company Name: DM-AirTech GmbH
-Author: Harsh Panwar
-Email: harsh@dm-airtech.com
-Created on: Mon May 22 16:50:10 2023
+Author: Dario Milani
+Email: dario@dm-airtech.com
+Updated on: Wed Jan 2025 16:45:06 2023
 
-Copyright (c) 2023, DM-AirTech GmbH
+Copyright (c) 2025, DM-AirTech GmbH
 
-Description: This script, verti_monitor_integrate, serves as an integration module for the VertiMonitor API, enabling users to seamlessly incorporate VertiMonitor's robust data and features within their own Python applications.
-
-The script includes functions to facilitate authentication, data retrieval, and processing using the VertiMonitor API, simplifying the process of sending requests to the API and handling responses.
-
-Usage of this script requires a valid VertiMonitor API key, which can be obtained by contacting the VertiMonitor sales and support team. The API key is necessary to authenticate requests to the VertiMonitor API and to access its features.
-
-Users of this script can integrate VertiMonitor's data directly into their Python applications, leveraging the power and flexibility of the VertiMonitor platform to enhance their own projects or products.
-
+Description: This script, Sample_integrate.py, serves as an integration module for the VertiMonitor API, 
+enabling users to seamlessly incorporate VertiMonitor's robust data and features within their own Python applications.
+The script includes functions to facilitate authentication, data retrieval, and processing using the VertiMonitor API, 
+simplifying the process of sending requests to the API and handling responses.
+Usage of this script requires a valid VertiMonitor API key, which can be obtained by contacting the VertiMonitor sales and support team. 
+The API key is necessary to authenticate requests to the VertiMonitor API and to access its features.
+Users of this script can integrate VertiMonitor's data directly into their Python applications, 
+leveraging the power and flexibility of the VertiMonitor platform to enhance their own projects or products.
 Please note that all interactions with the VertiMonitor API are subject to the terms and conditions of the API's usage policy.
 """
 
