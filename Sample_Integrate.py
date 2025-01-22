@@ -18,10 +18,8 @@ Users of this script can integrate VertiMonitor's data directly into their Pytho
 Please note that all interactions with the VertiMonitor API are subject to the terms and conditions of the API's usage policy.
 """
 
-import argparse
 import json
 import requests
-import csv
 import uuid
 
 def parse_point(point_str):
@@ -33,12 +31,13 @@ def parse_point(point_str):
         "altitude": int(point_data[3])
     }
 
-def send_request(api_key, mode, start_time, end_time, aircraft_id, points, parameters=None):
+def send_request(api_key, mode, model, start_time, end_time, aircraft_id, points, parameters=None):
     random_uuid = uuid.uuid4()
     data = {
         "ApiKey": api_key,
         "uuid": str(random_uuid),
         "mode": mode,
+        "model": model,
         "startTime": start_time,
         "endTime": end_time,
         "aircraftId": aircraft_id,
@@ -56,12 +55,20 @@ def send_request(api_key, mode, start_time, end_time, aircraft_id, points, param
     url = "https://www.dm-airtech.eu/api/VertiMonitorAPI"
 
     payload = json.dumps(data)
-  
+    
+    # Cross check with Postman
     headers = {
         'Content-Type': 'application/json',
-        # 'Authorization': f'Bearer {api_key}' make it work for frontend as well
+        'Authorization': f'Bearer {api_key}',
+        'User-Agent': 'PostmanRuntime/7.43.0',
+        'Accept': '*/*',
+        'Postman-Token': '',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Referer': 'https://dm-airtech.eu/api/VertiMonitorAPI',
+        'Host': 'www.dm-airtech.eu'
     }
-
+    
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 200:

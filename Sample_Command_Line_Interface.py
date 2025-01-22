@@ -35,6 +35,7 @@ def main():
     parser = argparse.ArgumentParser(description="VertiMonitor API Request")
     parser.add_argument("-k", "--apiKey", required=True, help="API key")
     parser.add_argument("-m", "--mode", required=True, help="trajectory, volume or sensor")
+    parser.add_argument("-md", "--model", required=True, help="gfs-global, metar, icon_global or icon_seamless")
     parser.add_argument("-d", "--startTime", required=True, help="Departure time (YYYY-MM-DDTHH:mm)")
     parser.add_argument("-a", "--endTime", required=True, help="Arrival time (YYYY-MM-DDTHH:mm)")
     parser.add_argument("-i", "--aircraftId", required=True, help="Aircraft ID")
@@ -70,6 +71,7 @@ def main():
         "ApiKey": args.apiKey,
         "uuid": str(random_uuid),
         "mode": args.mode,
+        "model": args.model,
         "startTime": args.startTime,
         "endTime": args.endTime,
         "aircraftId": args.aircraftId,
@@ -89,7 +91,14 @@ def main():
     payload = json.dumps(data_new)
     headers = {
         'Content-Type': 'application/json',
-        # 'Authorization': f'Bearer {args.apiKey}' make it work for FrontEnd as well.
+        'Authorization': f'Bearer {args.apiKey}',
+        'User-Agent': 'PostmanRuntime/7.43.0',
+        'Accept': '*/*',
+        'Postman-Token': '',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Referer': 'https://dm-airtech.eu/api/VertiMonitorAPI',
+        'Host': 'www.dm-airtech.eu'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
