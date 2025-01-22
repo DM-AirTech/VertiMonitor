@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 """
 Company Name: DM-AirTech GmbH
-Author: Harsh Panwar
-Email: harsh@dm-airtech.com
-Created on: Mon May 22 16:45:06 2023
+Author: Dario Milani
+Email: dario@dm-airtech.com
+Updated on: Wed Jan 2025 16:45:06 2023
 
-Copyright (c) 2023, DM-AirTech GmbH
+Copyright (c) 2025, DM-AirTech GmbH
 
-Description: verti_monitor_CLI is a command-line interface script that enables users to seamlessly interact with the VertiMonitor product. It serves as a convenient tool for users to execute VertiMonitor's functions and features directly from their terminal, bypassing the need for a graphical user interface.
-
+Description: 
+Sample_Command_Line.py is a command-line interface script that enables users to seamlessly interact with the VertiMonitor product. 
+It serves as a convenient tool for users to execute VertiMonitor's functions and features directly from their terminal, bypassing the need for a graphical user interface.
 It's designed to be user-friendly, and guides the user through the various functionalities of the VertiMonitor product, including real-time monitoring, data analysis, alerts, and much more.
-
-To use verti_monitor_CLI, an API key is required. This key connects the CLI tool to the VertiMonitor product and verifies the user's access permissions. Users can obtain their API key by contacting our sales and support team. Our dedicated team is ready to assist users in setting up their CLI tool and addressing any questions or issues.
+To use Sample_Command_Line.py, an API key is required. This key connects the CLI tool to the VertiMonitor product and verifies the user's access permissions. 
+Users can obtain their API key by contacting our sales and support team. Our dedicated team is ready to assist users in setting up their CLI tool and addressing any questions or issues.
 """
 
 import argparse
