@@ -56,7 +56,6 @@ def send_request(api_key, mode, model, start_time, end_time, aircraft_id, points
 
     payload = json.dumps(data)
     
-    # Cross check with Postman
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {api_key}',
